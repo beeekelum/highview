@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "302070400621",
+    "project_id": "highview-bb585",
+    "storage_bucket": "highview-bb585.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:302070400621:android:44c625627a875f4592a164",
+        "android_client_info": {
+          "package_name": "com.highview.bheki.highview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "302070400621-vi3pb5ivk2s5od4oam4ju6kl870sclun.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUQqCTL6q2oPhCJ-R8FTBwlPR_j0tVNRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "302070400621-vi3pb5ivk2s5od4oam4ju6kl870sclun.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
