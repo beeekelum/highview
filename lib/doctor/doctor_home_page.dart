@@ -10,7 +10,7 @@ import 'package:highview/doctor/my_patients.dart';
 import 'package:highview/doctor/symptom_checker.dart';
 import 'package:highview/patient/doctor_type_list.dart';
 import 'package:highview/patient/my_appointments.dart';
-import 'package:highview/patient/my_diagnosis.dart';
+import 'package:highview/patient/my_home.dart';
 import 'package:highview/patient/my_medical_information.dart';
 import 'package:highview/patient/my_visits.dart';
 
@@ -80,7 +80,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     DoctorTypeList(),
     MyAppointments(),
     SymptomChecker(),
-    MyMedicalInformation(),
     Profile(),
   ];
 
@@ -110,7 +109,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.description),
-      label: 'Book Doctor',
+      label: 'Book',
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.calendar_today),

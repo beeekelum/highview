@@ -28,20 +28,46 @@ class Profile extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data = snapshot.data.data() as Map<String, dynamic>;
-            return Column(
-              children: [
-                Text("Full Name: ${data['firstName']} ${data['lastName']}"),
-                Text("Email: ${data['email']}"),
-                Text("Speciality: ${data['speciality']} "),
-                Text("Location: ${data['location']} "),
-                Text("Gender: ${data['gender']} "),
-                Text("User Type: ${data['userType']} "),
-              ],
+            return Center(
+              child: Column(
+                children: [
+                  CircleAvatar(radius: 50, child: Icon(Icons.person),),
+                  _displayData("Full Name:", "${data['firstName']} ${data['lastName']}"),
+                  _displayData("Email:", "${data['email']}"),
+                  _displayData("Speciality:", "${data['speciality']} "),
+                  _displayData("Location:", "${data['location']} "),
+                  _displayData("Gender:", "${data['gender']} "),
+                  _displayData("User Type:", "${data['userType']} "),
+                ],
+              ),
             );
           }
 
-          return Text("loading");
+          return Center(child: CircularProgressIndicator());
         },
+      ),
+    );
+  }
+  Widget _displayData(String key, String value) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(key),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          Divider(),
+        ],
       ),
     );
   }

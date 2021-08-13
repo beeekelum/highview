@@ -12,7 +12,7 @@ class _MyHomeState extends State<MyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My Diagnosis'),
+        title: Text('My Home'),
       ),
     );
   }

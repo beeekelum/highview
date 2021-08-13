@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:get/get.dart';
 
 class DoctorDetails extends StatelessWidget {
   const DoctorDetails({Key key, this.docDetails}) : super(key: key);
@@ -10,24 +11,41 @@ class DoctorDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String patientName, email, phoneNumber;
     Map<String, dynamic> data = docDetails.data() as Map<String, dynamic>;
     CollectionReference appointments =
         FirebaseFirestore.instance.collection('appointments');
-    final FirebaseAuth _ath = FirebaseAuth.instance;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(_auth.currentUser.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> data =
+            documentSnapshot.data() as Map<String, dynamic>;
+        patientName = '${data['firstName']} ${data['lastName']}';
+        email = '${data['email']}';
+        phoneNumber = '${data['phoneNumber']}';
+        print('Document exists on the database');
+      }
+    });
     DateTime bookingDate;
     String additionalInfo;
     Future<void> addAppointment() {
       return appointments
           .add({
-            'fullName': '${data['firstName']} ${data['lastName']}',
+            'fullName': patientName,
+            'email': email,
+            'phoneNumber': phoneNumber,
             'bookingDate': bookingDate,
             'additionalInfo': additionalInfo,
             'doctorId': data['userUid'],
-            'patientId': _ath.currentUser.uid,
+            'patientId': _auth.currentUser.uid,
             'dateCreated': DateTime.now(),
             'status': 'New'
           })
-          .then((value) => print("User Added"))
+          .then((value) => Get.snackbar('HighView', 'Booking successfully'))
           .catchError((error) => print("Failed to add user: $error"));
     }
 
