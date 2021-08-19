@@ -88,8 +88,6 @@
 //   }
 // }
 
-
-
 import 'package:flutter/material.dart';
 import 'package:highview/doctor/widgets/account.card.dart';
 import 'package:highview/doctor/widgets/appointment.card.dart';

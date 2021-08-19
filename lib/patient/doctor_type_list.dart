@@ -36,7 +36,7 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
       'https://www.hi-techmedicalrkl.org/images/icons/Dermatology.png',
       'https://icons.iconarchive.com/icons/medicalwp/medical/256/Cardiology-blue-icon.png',
       'https://www.pngitem.com/pimgs/m/79-794802_medico-gastroenterologo-logo-hd-png-download.png',
-      'https://www.nicepng.com/png/detail/20-206990_primary-care-doctor-doctor-png.png',
+      'https://img2.pngio.com/blood-donation-healthcare-hematology-icon-hematology-png-512_512.png',
     ];
 
     return Scaffold(
@@ -91,8 +91,8 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
             gradient: LinearGradient(
               begin: Alignment.bottomRight,
               colors: [
-                Colors.black.withOpacity(.1),
-                Colors.black.withOpacity(.1),
+                Colors.black.withOpacity(.5),
+                Colors.black.withOpacity(.5),
               ],
             ),
           ),
@@ -100,14 +100,14 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Wrap(
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       type,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: 17,
                       ),
                     ),
                   ],

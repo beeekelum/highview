@@ -16,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final _firstNameTextController = TextEditingController();
   final _lastNameTextController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
    String location = '';
@@ -25,6 +26,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final _focusFirstName = FocusNode();
   final _focusLastName = FocusNode();
+  final _focusPhoneNumber = FocusNode();
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
 
@@ -99,6 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                           ),
+                          keyboardType: TextInputType.text,
                         ),
                         SizedBox(height: 16.0),
                         FormBuilderTextField(
@@ -117,6 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                           ),
+                          keyboardType: TextInputType.text,
                         ),
                         SizedBox(height: 16.0),
                         FormBuilderTextField(
@@ -136,6 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                           ),
+                          keyboardType: TextInputType.emailAddress,
                         ),
                         SizedBox(height: 16.0),
                         FormBuilderTextField(
@@ -155,6 +160,25 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                           ),
+                        ),
+                        SizedBox(height: 16.0),
+                        FormBuilderTextField(
+                          name: 'phone_number',
+                          controller: _phoneNumberController,
+                          focusNode: _focusPhoneNumber,
+                          validator: FormBuilderValidators.compose([
+                            FormBuilderValidators.required(context),
+                          ]),
+                          decoration: InputDecoration(
+                            hintText: "Phone number",
+                            errorBorder: UnderlineInputBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                              borderSide: BorderSide(
+                                color: Colors.red,
+                              ),
+                            ),
+                          ),
+                          keyboardType: TextInputType.phone,
                         ),
                         SizedBox(height: 16.0),
                         FormBuilderDropdown(
@@ -254,6 +278,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                             lastName: _lastNameTextController.text,
                                             email: _emailTextController.text,
                                             password:_passwordTextController.text,
+                                            phoneNumber: _phoneNumberController.text,
                                             gender: gender,
                                             speciality: speciality,
                                             location: location,

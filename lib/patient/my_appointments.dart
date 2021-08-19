@@ -30,8 +30,10 @@ class _MyAppointmentsState extends State<MyAppointments> {
           ),
           body: const TabBarView(
             children: [
-              NewAppointments(),
-              CompletedAppointments(),
+              Appointments(status: 'New'),
+              Appointments(
+                status: 'Completed',
+              ),
             ],
           ),
         ),
@@ -40,8 +42,9 @@ class _MyAppointmentsState extends State<MyAppointments> {
   }
 }
 
-class NewAppointments extends StatelessWidget {
-  const NewAppointments({Key key}) : super(key: key);
+class Appointments extends StatelessWidget {
+  const Appointments({Key key, this.status}) : super(key: key);
+  final String status;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +52,7 @@ class NewAppointments extends StatelessWidget {
     final Stream<QuerySnapshot> _appointmentsStream =
     FirebaseFirestore.instance.collection('appointments')
         .where('patientId', isEqualTo: _auth.currentUser.uid)
-        .where('status', isEqualTo: 'Pending')
+        .where('status', isEqualTo: status)
         .snapshots();
 
     return StreamBuilder<QuerySnapshot>(
@@ -60,7 +63,7 @@ class NewAppointments extends StatelessWidget {
           return Text('Something went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return Center(child: CircularProgressIndicator());
         }
         return ListView(
           children: snapshot.data.docs.map((DocumentSnapshot document) {
@@ -86,12 +89,6 @@ class NewAppointments extends StatelessWidget {
                     label: Text("View"),
                     icon: Icon(Icons.search),
                   ),
-                ),
-                Row(
-                  children: [
-                    TextButton.icon(onPressed: (){}, icon: Icon(Icons.done), label: Text('Accept')),
-                    TextButton.icon(onPressed: (){}, icon: Icon(Icons.cancel), label: Text('Decline')),
-                  ],
                 ),
               ],
             );

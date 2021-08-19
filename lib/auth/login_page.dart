@@ -106,11 +106,11 @@ class _LoginPageState extends State<LoginPage> {
                                 VerticalText(),
                                 TextLogin(),
                               ]),
-                              SizedBox(height: 20.0),
+                              SizedBox(height: 25.0),
                               inputEmail(),
-                              SizedBox(height: 20.0),
+                              SizedBox(height: 25.0),
                               passwordInput(),
-                              SizedBox(height: 24.0),
+                              SizedBox(height: 30.0),
                               _isProcessing
                                   ? CircularProgressIndicator()
                                   : buttonLogin(),
@@ -218,23 +218,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-        SizedBox(width: 24.0),
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) =>
-                      RegisterPage(),
-                ),
-              );
-            },
-            child: Text(
-              'Register',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
+
       ],
     );
   }

@@ -83,11 +83,14 @@ class AppointmentDetails extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(key),
+              Text(key, style: TextStyle(
+                fontSize: 18,
+
+              ),),
               Text(
                 value,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),

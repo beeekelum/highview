@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:highview/patient/meal_exercise_plans.dart';
 
 class MyPatients extends StatefulWidget {
   const MyPatients({Key key}) : super(key: key);
@@ -44,15 +45,45 @@ class _MyPatientsState extends State<MyPatients> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Material(
-                    elevation: 1,
-                    child: ListTile(
-                      title: Text('${data['fullName']}'),
-                      leading: CircleAvatar(child: Icon(Icons.person),),
-                      trailing: TextButton(
-                        onPressed: () {
-                        },
-                        child: Text("Chat"),
-                      ),
+                    elevation: 3,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListTile(
+                          title: Text('${data['fullName']}', style: TextStyle(fontWeight: FontWeight.bold),),
+                          leading: CircleAvatar(child: Icon(Icons.person),),
+                          trailing: Column(
+                            children: [
+                              TextButton.icon(
+                                onPressed: () {
+                                },
+                                label: Text("Chat"),
+                                icon: Icon(Icons.chat),
+                              ),
+                              TextButton.icon(
+                                onPressed: () {
+                                },
+                                label: Text("Call"),
+                                icon: Icon(Icons.phone),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: MaterialButton(
+                            color: Colors.green,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => MealExercisePlan(patientDetails: document,)),
+                              );
+                            },
+                            child: Text("Diet and exercise plan", style: TextStyle(color: Colors.white),),
+                          ),
+                        )
+                      ],
                     ),
                   ),
                 );

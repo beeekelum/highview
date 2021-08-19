@@ -31,30 +31,30 @@ class FireAuth {
 
   UserObject _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserObject(
-      userType: (snapshot.data() as Map<String, dynamic>) ['userType'],
-      phoneNumber: (snapshot.data() as Map<String, dynamic>) ['phoneNumber'],
-      profilePicture: (snapshot.data() as Map<String, dynamic>) ['profilePicture'],
-      email: (snapshot.data() as Map<String, dynamic>) ['email'],
-      firstName: (snapshot.data() as Map<String, dynamic>) ['firstName'],
-      lastName: (snapshot.data() as Map<String, dynamic>) ['lastName'],
-      displayName: (snapshot.data() as Map<String, dynamic>) ['displayName'],
-      userUid: (snapshot.data() as Map<String, dynamic>) ['userUid'],
-      gender: (snapshot.data() as Map<String, dynamic>) ['gender'],
-      profile: (snapshot.data() as Map<String, dynamic>) ['profile'],
+      userType: (snapshot.data() as Map<String, dynamic>)['userType'],
+      phoneNumber: (snapshot.data() as Map<String, dynamic>)['phoneNumber'],
+      profilePicture:
+          (snapshot.data() as Map<String, dynamic>)['profilePicture'],
+      email: (snapshot.data() as Map<String, dynamic>)['email'],
+      firstName: (snapshot.data() as Map<String, dynamic>)['firstName'],
+      lastName: (snapshot.data() as Map<String, dynamic>)['lastName'],
+      displayName: (snapshot.data() as Map<String, dynamic>)['displayName'],
+      userUid: (snapshot.data() as Map<String, dynamic>)['userUid'],
+      gender: (snapshot.data() as Map<String, dynamic>)['gender'],
+      profile: (snapshot.data() as Map<String, dynamic>)['profile'],
     );
   }
 
-
-  static Future<User> registerUsingEmailPassword({
-    String firstName,
-    String lastName,
-    String email,
-    String password,
-    String gender,
-    String speciality,
-    String location,
-    String userType
-  }) async {
+  static Future<User> registerUsingEmailPassword(
+      {String firstName,
+      String lastName,
+      String email,
+      String password,
+      String phoneNumber,
+      String gender,
+      String speciality,
+      String location,
+      String userType}) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User user;
     try {
@@ -67,17 +67,24 @@ class FireAuth {
           firstName: firstName,
           lastName: lastName,
           email: email,
+          phoneNumber: phoneNumber,
           gender: gender,
           speciality: speciality,
           location: location,
-      userType: userType);
+          userType: userType);
       await user.reload();
       user = auth.currentUser;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password is too weak');
+        Get.snackbar(
+          'Not',
+          'The password is too weak',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        // print('The password is too weak');
       } else if (e.code == 'email-already-in-use') {
-        Get.snackbar('Email', 'The account already exists for that email');
+        Get.snackbar('Email', 'The account already exists for that email',
+            snackPosition: SnackPosition.BOTTOM);
         print('The account already exists for that email');
       }
     } catch (e) {
@@ -91,20 +98,21 @@ class FireAuth {
     String firstName,
     String lastName,
     String email,
+    String phoneNumber,
     String gender,
     String speciality,
     String location,
     String userType,
   }) async {
-    DocumentReference documentReference =
-        _usersCollection.doc(userUid);
+    DocumentReference documentReference = _usersCollection.doc(userUid);
     Map<String, dynamic> data;
-    if(userType == "Doctor"){
+    if (userType == "Doctor") {
       data = <String, dynamic>{
         "userUid": userUid,
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
+        "phoneNumber": phoneNumber,
         "gender": gender,
         "speciality": speciality,
         "location": location,
@@ -116,6 +124,7 @@ class FireAuth {
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
+        "phoneNumber": phoneNumber,
         "gender": gender,
         "location": location,
         "userType": userType

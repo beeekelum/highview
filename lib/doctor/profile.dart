@@ -34,7 +34,7 @@ class Profile extends StatelessWidget {
                   CircleAvatar(radius: 50, child: Icon(Icons.person),),
                   _displayData("Full Name:", "${data['firstName']} ${data['lastName']}"),
                   _displayData("Email:", "${data['email']}"),
-                  _displayData("Speciality:", "${data['speciality']} "),
+                  data['userType'] == 'Doctor' ? _displayData("Speciality:", "${data['speciality']} "): Container(),
                   _displayData("Location:", "${data['location']} "),
                   _displayData("Gender:", "${data['gender']} "),
                   _displayData("User Type:", "${data['userType']} "),

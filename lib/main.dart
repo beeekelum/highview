@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
           GetMaterialApp(
         title: 'HighView',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(primarySwatch: Colors.blueGrey),
+        theme: ThemeData(primarySwatch: Colors.blueGrey, fontFamily: 'Montserrat'),
         initialRoute: '/login',
         // home: LoginPage(),
             getPages: AppRoutes.routes,
