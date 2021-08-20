@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:highview/doctor/appointment_details.dart';
 
 class MyAppointments extends StatefulWidget {
   const MyAppointments({Key key}) : super(key: key);
@@ -85,6 +86,11 @@ class Appointments extends StatelessWidget {
                   leading: CircleAvatar(child: Icon(Icons.person),),
                   trailing: TextButton.icon(
                     onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AppointmentDetails(appointmentDetails: document,),
+                        ),);
                     },
                     label: Text("View"),
                     icon: Icon(Icons.search),

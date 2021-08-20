@@ -103,8 +103,9 @@ class _MyHomeState extends State<MyHome> {
               child: Column(
                 children: [
                   GestureDetector(
-                    onTap:(){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => MealPlan()));
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MealPlan()));
                     },
                     child: Container(
                       height: 120,
@@ -134,7 +135,9 @@ class _MyHomeState extends State<MyHome> {
                       ) /* add child content here */,
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   GestureDetector(
                     child: Container(
                       height: 120,
@@ -154,22 +157,22 @@ class _MyHomeState extends State<MyHome> {
                             child: Text(
                               'Emergency contacts',
                               style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold, color: Colors.white),
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
                             ),
                           ),
                         ],
                       ) /* add child content here */,
                     ),
-                    onTap: (){
-
-                      final ButtonStyle raisedButtonStyle =
-                      ElevatedButton.styleFrom(
-                        onPrimary: Colors.black87,
-                        primary: Colors.grey[300],
-                        minimumSize: Size(88, 36),
-                        padding: EdgeInsets.symmetric(horizontal: 16),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(2)),
+                    onTap: () {
+                      final ButtonStyle raisedButtonStyle = ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side: BorderSide(color: Colors.blueGrey),
+                          ),
                         ),
                       );
                       showGeneralDialog(
@@ -196,21 +199,48 @@ class _MyHomeState extends State<MyHome> {
                                         child: Container(
                                           child: Column(
                                             children: [
-                                              ElevatedButton(
-                                                style: raisedButtonStyle,
-                                                onPressed: () {},
-                                                child: Text('Call Ambulance'),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  width: 200,
+                                                  height: 50,
+                                                  child: ElevatedButton(
+                                                    style: raisedButtonStyle,
+                                                    onPressed: () {},
+                                                    child:
+                                                        Text('Call Ambulance'),
+                                                  ),
+                                                ),
                                               ),
-                                              ElevatedButton(
-                                                style: raisedButtonStyle,
-                                                onPressed: () {},
-                                                child: Text('Call Police'),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  width: 200,
+                                                  height: 50,
+                                                  child: ElevatedButton(
+                                                    style: raisedButtonStyle,
+                                                    onPressed: () {},
+                                                    child: Text('Call Police'),
+                                                  ),
+                                                ),
                                               ),
-                                              ElevatedButton(
-                                                style: raisedButtonStyle,
-                                                onPressed: () {},
-                                                child: Text('Call Childline'),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Container(
+                                                  width: 200,
+                                                  height: 50,
+                                                  child: ElevatedButton(
+                                                    style: raisedButtonStyle,
+                                                    onPressed: () {},
+                                                    child:
+                                                        Text('Call ChildLine'),
+                                                  ),
+                                                ),
                                               ),
+                                              Image.asset('assets/panic.jpg'),
                                             ],
                                           ),
                                         ),
@@ -221,8 +251,7 @@ class _MyHomeState extends State<MyHome> {
                                     flex: 1,
                                     child: SizedBox.expand(
                                       child: ElevatedButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context),
+                                        onPressed: () => Navigator.pop(context),
                                         child: Text(
                                           'Dismiss',
                                           style: TextStyle(fontSize: 20),
@@ -238,7 +267,6 @@ class _MyHomeState extends State<MyHome> {
                       );
                     },
                   ),
-
                 ],
               ),
             ),

@@ -90,7 +90,6 @@ class AppointmentDetails extends StatelessWidget {
               Text(
                 value,
                 style: TextStyle(
-                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),

@@ -14,7 +14,6 @@ class DoctorTypeList extends StatefulWidget {
 class _DoctorTypeListState extends State<DoctorTypeList> {
   @override
   Widget build(BuildContext context) {
-
     int columnCount = 2;
     List<String> typesOfDoctors = [
       'General practitioner',
@@ -25,7 +24,8 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
       'Dermatologist',
       'Cardiologists',
       'Gastroenterologists',
-      'Hematologists'];
+      'Hematologists'
+    ];
 
     List<String> specialityIcons = [
       'https://www.nicepng.com/png/detail/20-206990_primary-care-doctor-doctor-png.png',
@@ -40,15 +40,15 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
     ];
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Book a Doctor'),
-        ),
+      appBar: AppBar(
+        title: const Text('Book a Doctor'),
+      ),
       body: AnimationLimiter(
         child: GridView.count(
           crossAxisCount: columnCount,
           children: List.generate(
             typesOfDoctors.length,
-                (int index) {
+            (int index) {
               return AnimationConfiguration.staggeredGrid(
                 position: index,
                 duration: const Duration(milliseconds: 375),
@@ -57,7 +57,8 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
                   child: FadeInAnimation(
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: yourListChild(typesOfDoctors[index], specialityIcons[index]),
+                      child: yourListChild(
+                          typesOfDoctors[index], specialityIcons[index]),
                     ),
                   ),
                 ),
@@ -70,12 +71,19 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
   }
 
   GestureDetector yourListChild(String type, String imageUrl) {
-   return GestureDetector(
-     onTap: () {
-       // Get.toNamed("doctor_list/$type/view");
-       Get.to(DoctorList()) ;
-     },
-     child: Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DoctorList(
+              docType: type,
+            ),
+          ),
+        );
+        // Get.to(DoctorList()) ;
+      },
+      child: Container(
         width: 150,
         height: 90,
         decoration: BoxDecoration(
@@ -117,6 +125,6 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
           ),
         ),
       ),
-   );
+    );
   }
 }

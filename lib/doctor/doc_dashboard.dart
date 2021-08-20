@@ -258,6 +258,7 @@ class DoctorDashboard extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
               child: ListView(
+                physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   Text(
                     "Appointments",

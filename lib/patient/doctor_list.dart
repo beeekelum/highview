@@ -4,12 +4,16 @@ import 'package:get/get.dart';
 import 'package:highview/patient/doctor_details_page.dart';
 
 class DoctorList extends StatelessWidget {
-  const DoctorList({Key key}) : super(key: key);
+  const DoctorList({Key key, this.docType}) : super(key: key);
+
+  final String docType;
 
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> _usersStream =
-        FirebaseFirestore.instance.collection('users').where("userType", isEqualTo: "Doctor").snapshots();
+        FirebaseFirestore.instance.collection('users')
+            .where("userType", isEqualTo: "Doctor")
+            .snapshots();
     return Scaffold(
         appBar: AppBar(
           title: Text("Doctors"),

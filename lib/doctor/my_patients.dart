@@ -25,7 +25,7 @@ class _MyPatientsState extends State<MyPatients> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Patients chat'),
+        title: const Text('Patients'),
       ),
       body: StreamBuilder<QuerySnapshot>(
       stream: _appointmentsStream,
@@ -35,7 +35,7 @@ class _MyPatientsState extends State<MyPatients> {
           return Text('Something went wrong');
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
+          return Center(child: CircularProgressIndicator());
         }
         return ListView(
           children: snapshot.data.docs.map((DocumentSnapshot document) {

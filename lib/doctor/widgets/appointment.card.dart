@@ -67,14 +67,14 @@ class AppointmentCard extends StatelessWidget {
                       Text(
                         title,
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         subtitle,
                         style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 18,
                           color: Colors.grey,
                         ),
                       ),

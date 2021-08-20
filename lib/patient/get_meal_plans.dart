@@ -29,9 +29,9 @@ class MealPlan extends StatelessWidget {
                 Map<String, dynamic> data =
                 document.data() as Map<String, dynamic>;
                 return ListTile(
-                  title: Text('${data['firstName']} ${data['lastName'] }'),
-                  subtitle: Text(data['userType']),
-                  leading: CircleAvatar(child: Icon(Icons.person),),
+                  title: Text('${data['day']}'),
+                  subtitle: Text(data['mealType']),
+                  leading: CircleAvatar(child: Icon(Icons.set_meal),),
                   trailing: TextButton(
                     onPressed: () {
                       // Navigator.push(
@@ -40,7 +40,7 @@ class MealPlan extends StatelessWidget {
                       //     builder: (context) => DoctorDetails(docDetails: document,),
                       //   ),);
                     },
-                    child: Text("Book"),
+                    child: Text("View"),
                   ),
                 );
               }).toList(),

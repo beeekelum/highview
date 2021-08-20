@@ -1,8 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:highview/auth/login_page.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
+  final User user;
+
+  const Profile({Key key, this.user}) : super(key: key);
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  bool _isSigningOut = false;
+
+  User _currentUser;
+
+  @override
+  void initState() {
+    _currentUser = widget.user;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +56,32 @@ class Profile extends StatelessWidget {
                   _displayData("Location:", "${data['location']} "),
                   _displayData("Gender:", "${data['gender']} "),
                   _displayData("User Type:", "${data['userType']} "),
+                  SizedBox(height: 16.0),
+                  _isSigningOut
+                      ? CircularProgressIndicator()
+                      : ElevatedButton(
+                    onPressed: () async {
+                      setState(() {
+                        _isSigningOut = true;
+                      });
+                      await FirebaseAuth.instance.signOut();
+                      setState(() {
+                        _isSigningOut = false;
+                      });
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => LoginPage(),
+                        ),
+                      );
+                    },
+                    child: Text('Sign out'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             );
@@ -48,6 +92,7 @@ class Profile extends StatelessWidget {
       ),
     );
   }
+
   Widget _displayData(String key, String value) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
