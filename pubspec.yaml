@@ -39,6 +39,9 @@ dependencies:
   timeago: ^2.0.29
   flutter_chat_bubble: ^1.0.2
   path_drawing: ^0.5.1
+  geocoder: ^0.2.1
+  geolocator: ^5.3.2+2
+  url_launcher: ^6.0.9
 
 dependency_overrides:
   http:

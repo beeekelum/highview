@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:highview/patient/get_meal_plans.dart';
 import 'package:stretchy_header/stretchy_header.dart';
 
@@ -15,6 +17,34 @@ class _MyHomeState extends State<MyHome> {
   List<String> items = ['Consultations'];
   List<Color> colors = [Colors.blueGrey];
   List<String> counts = ['2'];
+
+  Position _currentPosition;
+  double lat, long;
+  final Geolocator geolocator = Geolocator()..forceAndroidLocationManager;
+  var locationOptions =
+      LocationOptions(accuracy: LocationAccuracy.high, distanceFilter: 10);
+
+  _getCurrentLocation() {
+    geolocator
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.best)
+        .then((Position position) {
+      setState(() {
+        _currentPosition = position;
+        lat = _currentPosition.latitude;
+        long = _currentPosition.longitude;
+      });
+      getUserLocation(lat, long);
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getCurrentLocation();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +270,13 @@ class _MyHomeState extends State<MyHome> {
                                                   ),
                                                 ),
                                               ),
-                                              Image.asset('assets/panic.jpg'),
+                                              GestureDetector(
+                                                onTap: (){
+                                                  _showMyDialog();
+                                                },
+                                                child: Image.asset(
+                                                    'assets/panic.jpg'),
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -273,6 +309,48 @@ class _MyHomeState extends State<MyHome> {
           ],
         ),
       ),
+    );
+  }
+
+  String address = '';
+
+  Future<String> getUserLocation(double latitude, double longitude) async {
+    final coordinates = new Coordinates(latitude, longitude);
+    var addresses =
+        await Geocoder.local.findAddressesFromCoordinates(coordinates);
+    var first = addresses.first;
+    setState(() {
+      address = "${first.featureName} : ${first.addressLine}";
+    });
+    return address;
+  }
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Current Location'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                //Text('This is a demo alert dialog.'),
+                Text(address),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Send Now'),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

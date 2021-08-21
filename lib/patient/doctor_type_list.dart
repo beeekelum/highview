@@ -99,8 +99,8 @@ class _DoctorTypeListState extends State<DoctorTypeList> {
             gradient: LinearGradient(
               begin: Alignment.bottomRight,
               colors: [
-                Colors.black.withOpacity(.5),
-                Colors.black.withOpacity(.5),
+                Colors.black.withOpacity(.2),
+                Colors.black.withOpacity(.2),
               ],
             ),
           ),
